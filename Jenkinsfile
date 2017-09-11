@@ -13,5 +13,11 @@ pipeline {
 '''
       }
     }
+    stage('docker push') {
+      steps {
+        sh '''docker login -u shruti17 -p
+docker push shruti17/popcorn:$BUILD_NUMBER'''
+      }
+    }
   }
 }
