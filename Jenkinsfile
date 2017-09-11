@@ -1,9 +1,16 @@
 pipeline {
   agent any
   stages {
-    stage('Greeting') {
+    stage('greeting') {
       steps {
-        sh 'hello world'
+        sh '''echo "hello world"
+'''
+      }
+    }
+    stage('build docker') {
+      steps {
+        sh '''docker build -t popcorn:$BUILD_NUMBER .
+'''
       }
     }
   }
