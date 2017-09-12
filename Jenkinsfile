@@ -10,18 +10,21 @@ pipeline {
 '''
       }
     }
-  stages {
-    stage('testing') {
-      steps {
-        sh '''echo "rails test"
-'''
-      }
+
     }  
     stage('build docker') {
       steps {
         sh '''docker build -t shruti17/popcorn:$BUILD_NUMBER .
 '''
       }
+    
+    stages {
+    stage('testing') {
+      steps {
+        sh '''docker run shruti17/popcorn:$BUILD_NUMBER rails test
+'''
+      }
+      
     }
     stage('docker push') {
       steps {
